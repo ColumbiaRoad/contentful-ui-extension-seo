@@ -1,0 +1,9 @@
+{
+  "id": "Title-Assistant",
+  "name": "Title-Assistant",
+  "srcdoc": "./build/index.html",
+  "fieldTypes": [
+    "Symbol",
+    "Text"
+  ]
+}
