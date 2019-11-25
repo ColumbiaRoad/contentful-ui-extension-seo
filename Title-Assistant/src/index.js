@@ -49,6 +49,7 @@ export class App extends React.Component {
 
   render() {
     return (
+      <>
       <TextInput
         width="large"
         type="text"
@@ -57,6 +58,8 @@ export class App extends React.Component {
         value={this.state.value}
         onChange={this.onChange}
       />
+      <a href="https://moz.com/learn/seo/title-tag"></a>
+      </>
     );
   }
 }
