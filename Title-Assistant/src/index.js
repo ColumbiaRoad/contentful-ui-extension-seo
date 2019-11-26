@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { TextInput, TextLink, HelpText, Switch } from '@contentful/forma-36-react-components';
+import {
+  TextInput,
+  TextLink,
+  HelpText,
+  Switch,
+  Button
+} from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
 import '@contentful/forma-36-react-components/dist/styles.css';
 import '@contentful/forma-36-fcss/dist/styles.css';
@@ -16,18 +22,15 @@ export class App extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
-    console.log(props.sdk.entry.fields.manualTitle.getValue());
-
     this.state = {
       value: props.sdk.field.getValue(),
-      manualMode: props.sdk.entry.fields.manualTitle.getValue()
+      manualMode: false
     };
   }
 
   calcFullTitle = (pageTitle, brandName, secondaryKeyword) => {
     let page = pageTitle || '';
-    let second = secondaryKeyword !== undefined ? ` - ${secondaryKeyword}` : '';
+    let second = secondaryKeyword === undefined ? ` - ${secondaryKeyword}` : '';
     let brand = brandName !== undefined ? brandName : '';
     brand = (page === '' && second === '') || brand === '' ? brand : ` | ${brand}`;
     return page + second + brand;
@@ -49,6 +52,7 @@ export class App extends React.Component {
     this.setState({ value });
   };
 
+  // while using manual mode
   onChange = e => {
     const value = e.currentTarget.value;
     this.setState({ value });
@@ -59,32 +63,52 @@ export class App extends React.Component {
     }
   };
 
+  // triggered by button to refresh title
+  updateTitle = () => {
+    let secondaryKeyword = this.props.sdk.entry.fields[
+      this.props.sdk.parameters.instance.secondaryTargetField
+    ]
+      ? this.props.sdk.entry.fields[
+          this.props.sdk.parameters.instance.secondaryTargetField
+        ].getValue()
+      : null;
+    let title = this.calcFullTitle(
+      this.props.sdk.entry.fields[this.props.sdk.parameters.instance.targetField].getValue(),
+      this.props.sdk.parameters.installation.brandName,
+      secondaryKeyword
+    );
+    this.setState({ value: title });
+    this.props.sdk.field.setValue(title);
+  };
+
   toggleManual = () => {
-    this.props.sdk.entry.fields.manualTitle
-      .setValue(!this.props.sdk.entry.fields.manualTitle.getValue())
-      .then(() => {
-        this.setState({ manualMode: this.props.sdk.entry.fields.manualTitle.getValue() });
-      });
+    this.setState({ manualMode: !this.state.manualMode });
   };
 
   render() {
     return (
       <>
-        <TextInput
-          width="large"
-          type="text"
-          id="title-assistant-input"
-          testId="title-assistant-input"
-          value={this.state.value || ''}
-          onChange={this.onChange}
-        />
         <Switch
-          isChecked={this.props.sdk.entry.fields.manualTitle.getValue()}
+          isChecked={this.state.manualMode}
           labelText="Set full title manually"
           id="setManually"
           onToggle={this.toggleManual}
-        />
-        <HelpText>Final display: {this.state.fullTitle}</HelpText>
+        />{' '}
+        {this.state.manualMode ? (
+          <TextInput
+            width="large"
+            type="text"
+            id="title-assistant-input"
+            testId="title-assistant-input"
+            value={this.state.value || ''}
+            onChange={this.onChange}
+          />
+        ) : (
+          <>
+            <Button onClick={this.updateTitle}>Update Title</Button>
+            <HelpText>Final display: {this.props.sdk.field.getValue()}</HelpText>{' '}
+          </>
+        )}
         <HelpText>
           Current title length:{' '}
           <span

@@ -16,6 +16,17 @@
         "name": "Title Max Length"
       }
     ],
-    "instance": []
+    "instance": [
+      {
+        "id": "targetField",
+        "type": "Symbol",
+        "name": "Target Page Name Field"
+      },
+      {
+        "id": "secondaryTargetField",
+        "type": "Symbol",
+        "name": "Secondary SEO Keyword Field"
+      }
+    ]
   }
 }
