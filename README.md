@@ -67,7 +67,12 @@ Suggests a length of max 155 character descriptions, and gives red color when it
 
 ## Installation to Contentful
 
-...
+* Clone repo to loal machine
+* cd <extension-name> && npm install
+* npm run login && npm run configure
+* npm run deploy
+
+This will bundle the extension to single file application, host that on contentfuls own extension hosting service and install it onto the space & environment that was setup in the configuration stage.
 
 ## Development
 
