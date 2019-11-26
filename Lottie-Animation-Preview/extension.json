@@ -1,0 +1,8 @@
+{
+  "id": "Lottie-Animation-Preview",
+  "name": "Lottie-Animation-Preview",
+  "srcdoc": "./build/index.html",
+  "fieldTypes": [
+    "Object"
+  ]
+}
