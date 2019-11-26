@@ -16,26 +16,12 @@ export class App extends React.Component {
 
   constructor(props) {
     super(props);
-    let value = '';
-    try {
-      let fieldValue = props.sdk.field.getValue();
-      if (fieldValue.split('|').length == 1) {
-        value = fieldValue;
-      } else {
-        value = fieldValue.split('-')[0].split(' |')[0];
-        console.log(value);
-      }
-    } catch (e) {
-      value = 'Placeholder';
-    }
+    console.log(props);
+    console.log(props.sdk.entry.fields.manualTitle.getValue());
+
     this.state = {
-      value,
-      fullTitle: this.calcFullTitle(
-        value,
-        false ? undefined : this.props.sdk.parameters.installation.brandName,
-        false ? undefined : this.props.sdk.parameters.instance.secondaryKeyword
-      ),
-      manualMode: false
+      value: props.sdk.field.getValue(),
+      manualMode: props.sdk.entry.fields.manualTitle.getValue()
     };
   }
 
@@ -60,54 +46,25 @@ export class App extends React.Component {
   }
 
   onExternalChange = value => {
-    if (value !== this.state.fullTitle && value !== undefined) {
-      console.log(value, 'external change', this.state.fullTitle);
-      try {
-        let fieldValue = value;
-        if (fieldValue.split('|').length == 1) {
-          this.setState({ value: fieldValue });
-        } else {
-          fieldValue = fieldValue.split('-')[0].split(' |')[0];
-          this.setState({ value: fieldValue });
-        }
-      } catch (e) {
-        value = 'Placeholder';
-      }
-    }
+    this.setState({ value });
   };
 
   onChange = e => {
     const value = e.currentTarget.value;
     this.setState({ value });
-    this.setTitle(value);
+    if (value) {
+      this.props.sdk.field.setValue(value);
+    } else {
+      this.props.sdk.field.removeValue();
+    }
   };
 
   toggleManual = () => {
-    console.log(this.props.sdk);
-    this.setState({ manualMode: !this.state.manualMode }, () => {
-      this.setTitle(this.state.value);
-    });
-  };
-
-  setTitle = value => {
-    this.setState(
-      {
-        fullTitle: this.calcFullTitle(
-          value,
-          this.state.manualMode ? undefined : this.props.sdk.parameters.installation.brandName,
-          this.state.manualMode ? undefined : this.props.sdk.parameters.instance.secondaryKeyword
-        )
-      },
-      () => {
-        if (value && !this.state.manualMode) {
-          this.props.sdk.field.setValue(this.state.fullTitle);
-        } else if (value) {
-          this.props.sdk.field.setValue(value);
-        } else {
-          this.props.sdk.field.removeValue();
-        }
-      }
-    );
+    this.props.sdk.entry.fields.manualTitle
+      .setValue(!this.props.sdk.entry.fields.manualTitle.getValue())
+      .then(() => {
+        this.setState({ manualMode: this.props.sdk.entry.fields.manualTitle.getValue() });
+      });
   };
 
   render() {
@@ -122,8 +79,7 @@ export class App extends React.Component {
           onChange={this.onChange}
         />
         <Switch
-          defaultChecked={false}
-          isChecked={this.state.manualMode}
+          isChecked={this.props.sdk.entry.fields.manualTitle.getValue()}
           labelText="Set full title manually"
           id="setManually"
           onToggle={this.toggleManual}
@@ -133,12 +89,14 @@ export class App extends React.Component {
           Current title length:{' '}
           <span
             className={
-              this.state.fullTitle.length >
-              (this.props.sdk.parameters.installation.titleMaxLength || 60)
+              this.state.value &&
+              this.state.value.length >
+                (this.props.sdk.parameters.installation.titleMaxLength || 60)
                 ? 'f36-color--warning'
                 : 'f36-color--positive'
             }>
-            {this.state.fullTitle.length} characters
+            {this.state.value && this.state.value.length > 0 ? this.state.value.length : 0}{' '}
+            characters
           </span>
         </HelpText>
         <TextLink
