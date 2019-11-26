@@ -2,8 +2,20 @@
   "id": "Title-Assistant",
   "name": "Title-Assistant",
   "srcdoc": "./build/index.html",
-  "fieldTypes": [
-    "Symbol",
-    "Text"
-  ]
+  "fieldTypes": ["Symbol", "Text"],
+  "parameters": {
+    "installation": [
+      {
+        "id": "brandName",
+        "type": "Symbol",
+        "name": "Brand Name"
+      },
+      {
+        "id": "titleMaxLength",
+        "type": "Number",
+        "name": "Title Max Length"
+      }
+    ],
+    "instance": []
+  }
 }
