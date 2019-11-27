@@ -30,7 +30,7 @@ export class App extends React.Component {
 
   calcFullTitle = (pageTitle, brandName, secondaryKeyword) => {
     let page = pageTitle || '';
-    let second = secondaryKeyword === undefined ? ` - ${secondaryKeyword}` : '';
+    let second = secondaryKeyword !== undefined ? ` - ${secondaryKeyword}` : '';
     let brand = brandName !== undefined ? brandName : '';
     brand = (page === '' && second === '') || brand === '' ? brand : ` | ${brand}`;
     return page + second + brand;
