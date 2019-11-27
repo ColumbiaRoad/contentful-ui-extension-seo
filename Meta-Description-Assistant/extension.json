@@ -1,0 +1,10 @@
+{
+  "id": "Meta-Description-Assistant",
+  "name": "Meta-Description-Assistant",
+  "srcdoc": "./build/index.html",
+  "fieldTypes": [
+    "Symbol",
+    "Symbols",
+    "Text"
+  ]
+}
