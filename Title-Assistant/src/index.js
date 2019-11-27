@@ -127,10 +127,9 @@ export class App extends React.Component {
           href="https://moz.com/learn/seo/title-tag"
           target="_blank"
           icon="ExternalLink"
-          linkType="primary"
-        />
-        See Title SEO Guidelines
-        <TextLink />
+          linkType="primary">
+          See Title SEO Guidelines
+        </TextLink>
       </>
     );
   }
