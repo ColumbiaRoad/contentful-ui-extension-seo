@@ -2,9 +2,14 @@
   "id": "Meta-Description-Assistant",
   "name": "Meta-Description-Assistant",
   "srcdoc": "./build/index.html",
-  "fieldTypes": [
-    "Symbol",
-    "Symbols",
-    "Text"
-  ]
+  "fieldTypes": ["Symbol", "Symbols", "Text"],
+  "parameters": {
+    "installation": [
+      {
+        "id": "descriptionMaxLength",
+        "type": "Number",
+        "name": "Meta Description Max Length"
+      }
+    ]
+  }
 }
