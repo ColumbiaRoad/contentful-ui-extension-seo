@@ -13,7 +13,6 @@ export class App extends React.Component {
   };
 
   detachExternalChangeHandler = null;
-
   constructor(props) {
     super(props);
     this.state = {
@@ -64,8 +63,8 @@ export class App extends React.Component {
         <Textarea
           width="large"
           type="text"
-          id="my-field"
-          testId="my-field"
+          id="lottie-json"
+          testId="lottie-json"
           value={this.state.value}
           onChange={this.onChange}
         />
