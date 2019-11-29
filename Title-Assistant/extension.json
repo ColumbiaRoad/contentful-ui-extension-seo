@@ -1,0 +1,37 @@
+{
+  "id": "Title-Assistant",
+  "name": "Title-Assistant",
+  "srcdoc": "./build/index.html",
+  "fieldTypes": ["Symbol"],
+  "parameters": {
+    "installation": [
+      {
+        "id": "brandName",
+        "type": "Symbol",
+        "name": "Brand Name"
+      },
+      {
+        "id": "urlStub",
+        "type": "Symbol",
+        "name": "Url Stub"
+      },
+      {
+        "id": "titleMaxLength",
+        "type": "Number",
+        "name": "Title Max Length"
+      }
+    ],
+    "instance": [
+      {
+        "id": "urlField",
+        "type": "Symbol",
+        "name": "URL Slug Target Field"
+      },
+      {
+        "id": "metaTargetField",
+        "type": "Symbol",
+        "name": "Meta Description Target Field"
+      }
+    ]
+  }
+}
