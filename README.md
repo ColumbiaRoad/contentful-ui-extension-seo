@@ -67,8 +67,20 @@ Suggests a length of max 155 character descriptions, and gives red color when it
 
 ## Installation to Contentful
 
-...
+* Clone repo to loal machine
+* cd <extension-name> && npm install
+* npm run login && npm run configure
+* npm run deploy
+
+This will bundle the extension to single file application, host that on contentfuls own extension hosting service and install it onto the space & environment that was setup in the configuration stage.
 
 ## Development
 
-...
+* Clone repo to local machine
+* cd <extension-name> && npm install
+* npm run login && npm run configure
+* npm run start
+
+In the configuration stage, the extension gets installed into whatever environment you choose in the interactive prompts. The CLI-tool will configure contentful to fetch the extension source code from localhost:1234 and automatically updates server restart. If the dev server has not been started it will fail to show you the field because the iframe that the extension is rendered inside of fails to compile.
+
+As of writing it is unclear wether it rewrites the extension for all users and thus breaks it for everyone else using the environment that is being modified or if it just replaces the host target for the user. Regardless, always run development in environments that are separated from production content.
