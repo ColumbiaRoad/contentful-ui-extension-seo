@@ -6,7 +6,7 @@ This extension enables a content editor inside contentful to immediately see how
 
 ### Using Contentful web-app and GitHub
 
-TO BE FILLED IN WHEN I UNDERSTAND HOW TO DO IT.
+The simplest way to install a github is to provide a link to an extension.json file in a public github repo. Simply navigate to extension.json file in the folder structure of the extension you wish to install and then copy the url for that file. Then, in contentful, navigate to Settings -> Extensions. In the extensions settings page, click Add new extension -> Install from Github. If the pop-up does not accept the url from github then the url probably doesn't end with extension.json. If it does you can click Install button and wait a moment for the extension to finish installing. Once completed, set the installation parameters and start using the extensions by adding it to an asset model and setting the instance parameters.
 
 ### Using CLI and command line
 
