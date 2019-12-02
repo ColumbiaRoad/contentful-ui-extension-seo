@@ -25,7 +25,6 @@ Here's the expected setup for content types and fields (but you can use most ext
 | Field Name | Field type                                         |
 | ---------- | -------------------------------------------------- |
 | Name       | Short text, for internal use                       |
-| Navigation | ref to Navigation where this page is linked        |
 | Content    | Ref to Assembly models which are the UI components |
 
 
@@ -36,6 +35,7 @@ Here's the expected setup for content types and fields (but you can use most ext
 | URL Slug          | Short text              | 
 | Canonical         | Short text              | 
 | Title             | Short text              | 
+| Page | ref to Page where navigation points  |
 | Meta Description  | Long text               | 
 | Robot tags        | Short text, list        | 
 | Child-page        | Ref to Navigation entry | 
